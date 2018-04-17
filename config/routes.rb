@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   delete '/log_out' => 'sessions#destroy', as: :log_out
 
   get '/sign_in' => 'registrations#new', as: :registrations
-  post '/sign_in' => 'registrations#create', as: :sign_in
+  post '/sign_in' => 'users#create', as: :user_registration
+
+  get '/user:id' => 'users#show', as: :show_user
 
 end

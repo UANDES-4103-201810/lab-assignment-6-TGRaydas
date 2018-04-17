@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @user = User.find(params[:id])
   end
 
   # GET /users/new
@@ -26,18 +27,36 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     #complete this method
+    user = User.create(user_params)
+    if user.save
+      redirect_to root_url
+    else
+      redirect_to registrations_url
+    end
+
   end
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
     #complete this method
+    user = User.find(params[:id])
+    user.update(user_params)
+    if user.save
+      redirect_to user_url, notice: "Update was successfull"
+    else
+      redirect_to edit_user_url(params[:id]), notice: "Something was wrong"
+    end
   end
 
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
     #complete this method
+    user = User.find(params[:id])
+    if user.destroy
+      redirect_to users_url, notice: "Deleted User Successfull"
+    end
   end
 
   private
